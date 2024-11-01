@@ -1,0 +1,124 @@
+React (also known as React.js or ReactJS) is a free and open-source front-end JavaScript library[4][5] for building user interfaces based on components by Facebook Inc. It is maintained by Meta (formerly Facebook) and a community of individual developers and companies.[6][7][8]
+
+React can be used to develop single-page, mobile, or server-rendered applications with frameworks like Next.js. Because React is only concerned with the user interface and rendering components to the DOM, React applications often rely on libraries for routing and other client-side functionality.[9][10] A key advantage of React is that it only rerenders those parts of the page that have changed, avoiding unnecessary re-rendering of unchanged DOM elements. It was first launched on 29 May 2013.[11]
+Notable features
+Declarative
+
+[12]React adheres to the declarative programming paradigm.[13]: 76  Developers design views for each state of an application, and React updates and renders components when data changes. This is in contrast with imperative programming.[14]
+Components
+
+React code is made of entities called components.[13]: 10–12  These components are modular and reusable.[13]: 70  React applications typically consist of many layers of components. The components are rendered to a root element in the DOM using the React DOM library. When rendering a component, values are passed between components through props (short for "properties"). Values internal to a component are called its state.[15]
+
+The two primary ways of declaring components in React are through function components and class components.[13]: 118 [16]: 10 
+Function components
+
+Function components are declared with a function (using JavaScript function syntax or an arrow function expression) that accepts a single "props" argument and returns JSX. From React v16.8 onwards, function components can use state with the useState Hook.
+React Hooks
+
+On February 16, 2019, React 16.8 was released to the public, introducing React Hooks.[17] Hooks are functions that let developers "hook into" React state and lifecycle features from function components.[18] Notably, Hooks do not work inside classes — they let developers use more features of React without classes.[19]
+
+React provides several built-in hooks such as useState,[20][16]: 37  useContext,[13]: 11 [21][16]: 12  useReducer,[13]: 92 [21][16]: 65–66  useMemo[13]: 154 [21][16]: 162  and useEffect.[22][16]: 93–95  Others are documented in the Hooks API Reference.[23][13]: 62  useState and useEffect, which are the most commonly used, are for controlling state[13]: 37  and side effects,[13]: 61  respectively.
+Rules of hooks
+
+There are two rules of hooks[24] which describe the characteristic code patterns that hooks rely on:
+
+    "Only call hooks at the top level" — do not call hooks from inside loops, conditions, or nested statements so that the hooks are called in the same order each render.
+    "Only call hooks from React functions" — do not call hooks from plain JavaScript functions so that stateful logic stays with the component.
+
+Although these rules cannot be enforced at runtime, code analysis tools such as linters can be configured to detect many mistakes during development. The rules apply to both usage of Hooks and the implementation of custom Hooks,[25] which may call other Hooks.
+Server components
+
+React server components (RSC) [26] are function components that run exclusively on the server. The concept was first introduced in the talk "Data Fetching with Server Components".[27] Though a similar concept to Server Side Rendering, RSCs do not send corresponding JavaScript to the client as no hydration occurs. As a result, they have no access to hooks. However, they may be asynchronous function, allowing them to directly perform asynchronous operations:
+
+async function MyComponent() {
+  const message = await fetchMessageFromDb();
+
+  return (
+    <div>Message: {message}</div>
+  );
+}
+
+Currently, server components are most readily usable with Next.js.
+Class components
+
+Class components are declared using ES6 classes. They behave the same way that function components do, but instead of using Hooks to manage state and lifecycle events, they use the lifecycle methods on the React.Component base class.
+
+class ParentComponent extends React.Component {
+  state = { color: 'green' };
+  render() {
+    return (
+      <ChildComponent color={this.state.color} />
+    );
+  }
+}
+
+The introduction of React Hooks with React 16.8 in February 2019 allowed developers to manage state and lifecycle behaviors within functional components, reducing the reliance on class components.
+
+This trend aligns with the broader industry movement towards functional programming and modular design. As React continues to evolve, it is essential for developers to consider the benefits of functional components and React Hooks when building new applications or refactoring existing ones.[28]
+Routing
+
+React itself does not come with built-in support for routing. React is primarily a library for building user interfaces, and it does not include a full-fledged routing solution out of the box. Third-party libraries can be used to handle routing in React applications.[29] It allows the developer to define routes, manage navigation, and handle URL changes in a React-friendly way.
+There is a Virtual DOM that is used to implement the real DOM
+Virtual DOM
+
+Another notable feature is the use of a virtual Document Object Model, or Virtual DOM. React creates an in-memory data-structure cache, computes the resulting differences, and then updates the browser's displayed DOM efficiently.[30] This process is called reconciliation. This allows the programmer to write code as if the entire page is rendered on each change, while React only renders the components that actually change. This selective rendering provides a major performance boost.[31]
+Updates
+
+When ReactDOM.render[32] is called again for the same component and target, React represents the new UI state in the Virtual DOM and determines which parts (if any) of the living DOM needs to change.[33]
+Updates to realDOM are subject to virtualDOM
+The virtualDOM will update the realDOM in real-time effortlessly
+Lifecycle methods
+
+Lifecycle methods for class-based components use a form of hooking that allows the execution of code at set points during a component's lifetime.
+
+    ShouldComponentUpdate allows the developer to prevent unnecessary re-rendering of a component by returning false if a render is not required.
+    componentDidMount is called once the component has "mounted" (the component has been created in the user interface, often by associating it with a DOM node). This is commonly used to trigger data loading from a remote source via an API.
+    componentDidUpdate is invoked immediately after updating occurs.[34]
+    componentWillUnmount is called immediately before the component is torn down or "unmounted". This is commonly used to clear resource-demanding dependencies to the component that will not simply be removed with the unmounting of the component (e.g., removing any setInterval() instances that are related to the component, or an "eventListener" set on the "document" because of the presence of the component)
+    render is the most important lifecycle method and the only required one in any component. It is usually called every time the component's state is updated, which should be reflected in the user interface.
+
+JSX
+Main article: JSX
+
+JSX, or JavaScript XML, is an extension to the JavaScript language syntax.[35] Similar in appearance to HTML,[13]: 11  JSX provides a way to structure component rendering using syntax familiar[13]: 15  to many developers. React components are typically written using JSX, although they do not have to be (components may also be written in pure JavaScript). JSX is similar to another extension syntax created by Facebook for PHP called XHP.
+
+An example of JSX code:
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>Header</p>
+        <p>Content</p>
+        <p>Footer</p>
+      </div>
+    );
+  }
+}
+
+Architecture beyond HTML
+
+The basic architecture of React applies beyond rendering HTML in the browser. For example, Facebook has dynamic charts that render to <canvas> tags,[36] and Netflix and PayPal use universal loading to render identical HTML on both the server and client.[37][38]
+Server-side rendering
+	
+This section does not cite any sources. Please help improve this section by adding citations to reliable sources. Unsourced material may be challenged and removed. (May 2024) (Learn how and when to remove this message)
+
+Server-side rendering (SSR) refers to the process of rendering a client-side JavaScript application on the server, rather than in the browser. This can improve the performance of the application, especially for users on slower connections or devices.
+
+With SSR, the initial HTML that is sent to the client includes the fully rendered UI of the application. This allows the client's browser to display the UI immediately, rather than having to wait for the JavaScript to download and execute before rendering the UI.
+
+React supports SSR, which allows developers to render React components on the server and send the resulting HTML to the client. This can be useful for improving the performance of the application, as well as for search engine optimization purposes.
+Common idioms
+
+React does not attempt to provide a complete application library. It is designed specifically for building user interfaces[4] and therefore does not include many of the tools some developers might consider necessary to build an application. This allows the choice of whichever libraries the developer prefers to accomplish tasks such as performing network access or local data storage. Common patterns of usage have emerged as the library matures.
+Unidirectional data flow
+
+To support React's concept of unidirectional data flow (which might be contrasted with AngularJS's bidirectional flow), the Flux architecture was developed as an alternative to the popular model–view–controller architecture. Flux features actions which are sent through a central dispatcher to a store, and changes to the store are propagated back to the view.[39] When used with React, this propagation is accomplished through component properties. Since its conception, Flux has been superseded by libraries such as Redux and MobX.[40]
+
+Flux can be considered a variant of the observer pattern.[41]
+
+A React component under the Flux architecture should not directly modify any props passed to it, but should be passed callback functions that create actions which are sent by the dispatcher to modify the store. The action is an object whose responsibility is to describe what has taken place: for example, an action describing one user "following" another might contain a user id, a target user id, and the type USER_FOLLOWED_ANOTHER_USER.[42] The stores, which can be thought of as models, can alter themselves in response to actions received from the dispatcher.
+
+This pattern is sometimes expressed as "properties flow down, actions flow up". Many implementations of Flux have been created since its inception, perhaps the most well-known being Redux, which features a single store, often called a single source of truth.[43]
+
+In February 2019, useReducer was introduced as a React hook in the 16.8 release. It provides an API that is consistent with Redux, enabling developers to create Redux-like stores that are local to component states.[44] 
